@@ -1,10 +1,10 @@
 import { hashSync } from "bcrypt";
-import { SigninDto } from "../auth/types/signin";
+import { SigninInputs } from "../auth/types/signin";
 import { UserModel } from "./user.schema";
 import mongoose from "mongoose";
 
 export class UserService {
-  async createUser(dto: SigninDto) {
+  async createUser(dto: SigninInputs) {
     return UserModel.create(dto);
   }
 

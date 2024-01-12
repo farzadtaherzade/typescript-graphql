@@ -35,9 +35,9 @@ export class ArticleService {
     return article;
   }
 
-  async update(id: string, input: UpdateArticle, user: User) {
-    const article = await this.findArticleById(id);
-    if (article.owner == user._id)
+  async update(id: string, input: UpdateArticle, user: any) {
+    const article: any = await this.findArticleById(id);
+    if (user._id.toString() !== article.owner._id.toString())
       throw new ApolloError(
         `you are not authorized to update this article as it does not belong to you.`
       );
@@ -53,8 +53,8 @@ export class ArticleService {
     return updateArticle;
   }
 
-  async remove(id: string, user: User) {
-    const article = await this.findArticleById(id);
+  async remove(id: string, user: any) {
+    const article: any = await this.findArticleById(id);
     if (user._id.toString() !== article.owner._id.toString())
       throw new ApolloError(
         `you are not authorized to update this article as it does not belong to you.`
